@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<div>这是测试serviceworker页面
+  如果断网的情况下页面没有显示</div>
+<div>测试页面</div>
+
+
+</body>
+<!--<script src="./demo.js"></script>-->
+<script>
+  window.onload = function () {
+
+    var ajax = new XMLHttpRequest()
+    ajax.open('get','http://wiki.syswin.com/pages/viewpage.action?pageId=23604071')
+
+// ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+
+// ajax.send('namespace=cAlum.ugc.systoon.com&certificate=5926747a84f75e553089478c&logintype=0&frame=&code=')
+    ajax.send()
+    ajax.onreadystatechange = function () {
+      if(ajax.status == 200 && ajax.readyState == 4) {
+        console.log('ajax success')
+      }else{
+        console.log('err')
+      }
+    }
+
+  }
+
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/newservice/service-worker.js').then(function (res) {
+      console.log('registration successed scope'+ res.scope)
+    }).catch( function (err) {
+      console.log('registration failed'+ err)
+    })
+
+  }
+</script>
+</html>
